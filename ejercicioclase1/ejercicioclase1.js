@@ -38,9 +38,8 @@ class Evento {
         lugar,
         precio,
         capacidad = 50,
-        fecha = new Date().toLocasleDateString(),
+        fecha = new Date().toLocaleDateString(),
         participantes = []
-
     ) {
         this.nombre = nombre;
         this.lugar = lugar;
@@ -55,8 +54,13 @@ class Evento {
 class TicketManager {
     //el # -> significa variable privada 
     #precioBaseGanancia = 1.15;
-    eventos = [];
-    id = 0;
+    eventos;
+    id;
+
+    constructor() {
+        this.eventos = [];
+        this.id = 1;
+    }
 
     getEventos() {
         return this.eventos;
@@ -64,31 +68,83 @@ class TicketManager {
 
     agregarEvento(evento) {
         evento.precio = evento.precio * this.#precioBaseGanancia;
-        evento.id = this.id + 1;
+        evento.id = ++this.id;
 
         this.eventos.push(evento);
     }
-    agregarUsuario(idEvento, IdUsuario) {
-        const evento = this.eventos.filter(evento => evento.id === idEvento);
+
+    agregarUsuario(idEvento, idUsuario) {
+        // Compruebo que el evento exista
+        const evento = this.eventos.find((evento) => evento.id === idEvento);
         if (!evento) {
             console.log("El evento no existe");
             return;
         }
-        // Compruebo que el usuario no este registrad0
-        const user = evento.participantes.find(user => user === idUsuario)
+
+        // Compruebo que el usuario no este registrad
+        const user = evento.participantes.find((user) => user === idUsuario);
+
         if (user) {
             console.log("El usuario esta registrado");
             return;
         }
-        // Obtengo el id del evento para reemplazar los datos
 
+        // Obtengo el id del evento para reemplazar los datos
         const indexEvento = this.eventos.findIndex((evento) => evento.id === idEvento);
 
+        // Agregamos el usuario
         evento.participantes.push(idUsuario);
 
         this.eventos[indexEvento] = evento;
 
         console.log("Usuario agregado")
     }
+
+    ponerEventoEnGira(idEvento, nuevaLocalidad, nuevaFecha) {
+        // Compruebo que el evento exista
+        const evento = this.eventos.find((evento) => evento.id === idEvento);
+
+        if (!evento) {
+            console.log("El evento no existe");
+            return;
+        }
+
+        const nuevoEvento = new Evento(
+            evento.nombre,
+            nuevaLocalidad,
+            evento.precio,
+            evento.capacidad,
+            nuevaFecha
+        );
+
+        nuevoEvento.id = this.id++;
+
+        this.eventos.push(nuevoEvento);
+
+        console.log("Se pueso el evento en gira");
+    }
+
 }
+
+
+//Prueba 
+const manager = new TicketManager();
+
+const nuevoEvento = new Evento(
+    "Charla Dev", "Usina del arte", 250
+);
+
+manager.agregarEvento(nuevoEvento);
+
+// console.log(manager.getEventos());
+
+
+// Agregar participantes
+manager.agregarUsuario(1, 1);
+
+console.log(manager.getEventos());
+
+//Poner evento en gira
+manager.ponerEventoEnGira(2, "Puerto madero", new Date().toLocaleDateString());
+console.log(manager.getEventos());
 
