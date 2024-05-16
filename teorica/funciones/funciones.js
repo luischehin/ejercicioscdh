@@ -4,12 +4,12 @@
 function sumar(a, b) {
     return (a + b)
 }
-console.log(sumar(5 + 8));
+console.log(sumar(5, 8));
 
 
 // FUNCION PARA RESTAR 
 
-function restar(a, b) {
-    return a - b;
-}
-console.log(restar(10 - 4))
+// function restar(a, b) {
+//     return a - b;
+// }
+// console.log(restar(10 - 4))
