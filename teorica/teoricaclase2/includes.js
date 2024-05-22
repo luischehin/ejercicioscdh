@@ -15,4 +15,4 @@ if (nombres.includes('camilo')) {
     console.log("camilo no esta en la base de datos")
 }
 
-// En un termino mas resumido, lo que quiero hacer con el includes, es ver si el nombre camilo esta en la base de datos, y si no esta me salta el mensaje de que camilo no esta en la base de datos. 
+// En un termino mas resumido, lo que quiero hacer con el includes, es ver si el nombre camilo esta en la base de datos, y si no esta me salta el mensaje de que camilo no esta en la base de datos. . 
