@@ -57,4 +57,28 @@ Array.prototype.miPropiaFuncionMap = function (callback) {
     return nuevoArreglo;
 }
 let arregloPrueba = [1, 2, 3, 4, 5];
-let nuevosValores = arregloPrueba.miPropiaFuncionMap(x => x + 1);
+let nuevosValores1 = arregloPrueba.miPropiaFuncionMap(x => x + 1);
+
+
+//////////////////////////////////////////////// EJEMPLO DE CALLBACK CON DISTINTAS OPERACIONES //////////////////////////////
+
+const sumar = (numero1, numero2) => numero1 + numero2;
+const restar = (numero1, numero2) => numero1 - numero2;
+const multiplicar = (numero1, numero2) => numero1 * numero2;
+const dividir = (numero1, numero2) => numero1 / numero2;
+
+const realizarOperacion = (numero1, numero2, callback) => {
+    console.log("voy a realizar una operacion, no se cual, pero lo hare");
+    let resultado = callback(numero1, numero2);
+    // No sabemos cual de las 4 funciones sera, pero eso a nosotros no nos importa, nosotro solo la ejecutamos y devolvemos el resultado
+
+
+    console.log(`El resultado de la operacion que no supe ul fue, es: ${resultado}`)
+}
+
+realizarOperacion(2, 5, sumar);// el resultad de la operacion que no supe cual fue,es : 7
+realizarOperacion(2, 5, restar); // El resultado es: -3
+realizarOperacion(2, 5, multiplicar); // El resultado es 10
+realizarOperacion(2, 5, dividir); // el resultado es : 0,4 
+
+
