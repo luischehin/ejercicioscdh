@@ -3,7 +3,7 @@ const fechaActual = moment();
 const fechaNacimiento = moment("1999-03-20");
 
 if (fechaNacimiento.isVaid()) {
-    let dias = fechaActual.diff(fechaNacimiento, "days");
+    let dias = fechaActual.diff(fechaNacimiento, "days") // si pongo years, se cuenta en años en ve de dias;
     console.log(dias)
 
 }
